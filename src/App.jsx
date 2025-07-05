@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React, { useState, useEffect } from "react";
 // Import components
 import Header from "./assets/components/Header";
@@ -12,11 +10,9 @@ import { useResponsive } from "./assets/hooks/useResponsive";
 
 // Import local images for events
 import USIUGalaImage from "./assets/images/USIU_GALA_IMAGE.jpg";
-
-// Black placeholder image as data URI (1x1 black pixel)
-const blackPlaceholder =
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='black' /%3E%3C/svg%3E";
-
+import JAVASCRIPTsummit from "./assets/images/Javascript.jpeg";
+import CSSworkshop from "./assets/images/CssWorkshop.jpeg";
+   
 // Sample events data (would be fetched from backend normally)
 const sampleEvents = [
   {
@@ -26,7 +22,7 @@ const sampleEvents = [
       "Talent unleashed! Join us for an unforgettable evening of performances, networking, and celebration at the USIU GALA NIGHT.",
     date: "2025-07-11T18:00:00Z",
     location: "USIU Auditorium, Nairobi, Kenya",
-    price: 100,
+    price: 10,
     imageUrl: USIUGalaImage,
   },
   {
@@ -36,7 +32,7 @@ const sampleEvents = [
     date: "2025-10-01T10:00:00Z",
     location: "KICC, Nairobi, Kenya",
     price: 199,
-    imageUrl: blackPlaceholder,
+    imageUrl: JAVASCRIPTsummit,
   },
   {
     id: "e3",
@@ -45,7 +41,7 @@ const sampleEvents = [
     date: "2025-09-25T14:00:00Z",
     location: "Online - Zoom",
     price: 149,
-    imageUrl: blackPlaceholder,
+    imageUrl: CSSworkshop,
   },
 ];
 
