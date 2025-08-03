@@ -6,9 +6,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // Change 'base' to just '/static/'
-  base: '/static/', // <-- Make this change
+  base: '/', // <-- Make this change
   build: {
     outDir: 'dist', // Keep this as 'dist'
-  base: process.env.VITE_BASE_PATH || "/EventFlow",
   },
 })
