@@ -1,7 +1,7 @@
 // src/assets/components/SearchBar.jsx
 import React from 'react';
 import { Search } from 'lucide-react';
-import '../../assets/styles/partials/_searchBar.scss'; // SCSS import
+
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
   return (
