@@ -1,0 +1,76 @@
+/* src/assets/styles/login.scss */
+
+// This div covers the entire viewport as a fixed background
+.login-page-background {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed; /* Keep this fixed to cover the entire screen */
+  top: 0;
+  left: 0;
+  z-index: -1; /* Keep this at -1 to ensure it's at the very back */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex; /* Flexbox to center the login-container within it */
+  justify-content: center;
+  align-items: center;
+}
+
+// This is the login form box, centered on the page
+.login-container {
+  max-width: 400px;
+  /* Remove margin: 3rem auto; if it causes issues with flex centering.
+     The flexbox on .login-page-background handles the centering. */
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  text-align: center;
+
+  position: relative; /* Needs to be positioned for z-index to work */
+  z-index: 10;        /* Make sure this is higher than any other content that might overlap */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.9); /* Overlay for readability */
+
+  // These flex properties are for aligning content *inside* the login-container
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// ... rest of your form styles (input, button, .login-form, .form-inputs)
+
+.login-form {
+  width: 100%;
+}
+
+.form-inputs {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}

@@ -1,0 +1,112 @@
+.booking-overlay {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99999;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  transition: transform 0.3s ease-in-out;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); // semi-transparent dark
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; // really high
+
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: #555;
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+  }
+
+  .total {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #111;
+
+    .amount {
+      color: #4f46e5;
+    }
+  }
+
+  button[type='submit'] {
+    background-color: #4f46e5;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
+
+// src/assets/styles/BookingPanel.scss
+.booking-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); // translucent black
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.booking-panel {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 480px;
+  width: 100%;
+  padding: 2rem;
+  animation: popin 0.3s ease-out forwards;
+}
+
+@keyframes popin {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+

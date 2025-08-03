@@ -1,0 +1,145 @@
+@use './partials/navbar';
+@use './partials/footer'; 
+@use './partials/home';
+@use './partials/eventcard.scss';
+@use './partials/bookingpanel.scss';
+@use './partials/searchbar.scss';
+@use './partials/bookingspage.scss';
+@use './partials/loginpage.scss';
+@use './partials/signup.scss';
+@use './partials/bookingeventcard.scss';
+
+:root{
+    --background-color: #fff;
+    --background-light: #fff;
+    --shadow-color: rgba(0,0,0,0.2);
+    --primary-color: rgba(255, 0, 86);
+    --text-color: #0A0A0A ;
+    --text-light: #575757;
+    --font-size: 16px;
+    --animation-speed: 1;
+  
+  }
+
+    * {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-size: var(--font-size);
+    font-family: 'Roboto', sans-serif;
+    padding-top: 70px;
+    background-color: var(--background-light);
+  }
+  
+  
+  
+   a {
+    text-decoration: none;
+  } 
+
+  // Layout styles for EventListPage
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.event-heading {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: #1f2937; // dark gray
+  margin-bottom: 2rem;
+}
+
+.loading-message,
+.no-results,
+.error-message {
+  text-align: center;
+  font-size: 1.125rem;
+  margin-top: 2rem;
+}
+
+.error-message {
+  color: #dc2626; // red
+}
+
+.no-results,
+.loading-message {
+  color: #4b5563; // gray
+}
+
+// Reuse the .event-grid from previous response
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+  
+
+
+ @media screen and (max-width: 1280px){
+  .container{
+    padding-inline: 18vw;
+  }
+ }
+ @media screen and (max-width: 1050px){
+  .container{
+    padding-inline: 12vw;
+  }
+ }
+
+ @media screen and (max-width: 768px){
+    .navbar{
+        .nav-links{
+            display: none;
+        }
+        .sidebar-btn{
+            display: block;
+        }
+    }
+    .section{
+      .col{
+        width: 100%;
+        padding: 0 !important;
+        text-align: center;
+        margin-bottom: 2em;
+      }
+    }
+    .skill-item{
+      display: block;
+      margin: .75em;
+    }
+    .section.improve-skills .btn{
+      display: block;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+    .chef-card{
+      box-shadow: 0 5px 10px var(--shadow-color);
+    }
+    .container{
+      padding-inline: 6vw;
+    }
+    .footer{
+      grid-template-columns: repeat(4, 1fr);
+      .footer-section:nth-child(1){
+        grid-column: span 4;
+      }
+      .footer-section:nth-child(2), .footer-section:nth-child(3){
+        grid-column: span 2;
+      }
+    }
+ }
+ @media screen and (max-width: 480px){
+  .container{
+    padding-inline: 3vw;
+  }
+ }

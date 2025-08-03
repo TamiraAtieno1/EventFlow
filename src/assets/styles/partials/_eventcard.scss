@@ -1,0 +1,96 @@
+// src/assets/styles/partials/_eventCard.scss
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .event-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .event-content {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    flex-grow: 1;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
+
+    .event-description {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      max-height: 4.2em; // approx 3 lines
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .event-details {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 1rem;
+
+      div {
+        margin-bottom: 0.3rem;
+
+        span {
+          font-weight: 600;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    button {
+      margin-top: auto;
+      background: transparent;
+      border: 2px solid #dc2626;
+      color: #dc2626;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #dc2626;
+        color: #fff;
+      }
+    }
+  }
+}

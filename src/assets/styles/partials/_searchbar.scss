@@ -1,0 +1,36 @@
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.search-bar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #ccc;
+  border-radius: 9999px; // pill shape
+  font-size: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #9ca3af;
+  pointer-events: none;
+}
