@@ -1,14 +1,39 @@
+// Your existing .signup-container styles
 .signup-container {
   max-width: 400px;
   margin: 3rem auto;
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background: #5a0808;
+  background: #5a0808; // This background color will be beneath your image
+  position: relative; // Needed if you want to use z-index for content inside
+  z-index: 1; // Ensures card is above the page background
+
+  // Styles for the image background of the card itself
+  background-image: url('http://localhost:8000/media/login_images/party2.jpg'); // ADDED this line
+  background-size: cover;                                           // ADDED this line
+  background-position: center;                                      // ADDED this line
+  background-repeat: no-repeat;                                     // ADDED this line
+
+  // Optional: A semi-transparent overlay to make text readable over the image
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.6); // Adjust color and opacity as needed
+    z-index: -1; // Place behind content but above the image
+    border-radius: inherit; // Inherit border-radius from parent
+  }
+
+
   input {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 1rem;
+    color: #333; // Ensure input text is visible
   }
   button {
     padding: 0.6rem 1.2rem;
@@ -16,5 +41,32 @@
     color: white;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease; // Smooth transition
+    &:hover {
+        background-color: darken(#262424, 10%); // Darken on hover
+    }
   }
+
+  // Adjust text color if the background image makes it hard to read
+  h2, p {
+    color: #333; // Example: Dark text
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); // Optional: add shadow for readability
+  }
+}
+
+// New class for the full page background
+.signup-page-background {
+  background-image: url('http://localhost:8000/media/login_images/party3.jpg'); // ADDED this line
+  background-size: cover;                                           // ADDED this line
+  background-position: center;                                      // ADDED this line
+  background-repeat: no-repeat;                                     // ADDED this line
+  min-height: 100vh;                                                // ADDED this line
+  width: 100vw;                                                     // ADDED this line
+  display: flex;                                                    // ADDED this line
+  justify-content: center;                                          // ADDED this line
+  align-items: center;                                              // ADDED this line
+  position: fixed;                                                  // ADDED this line
+  top: 0;                                                           // ADDED this line
+  left: 0;                                                          // ADDED this line
+  z-index: -1;                                                      // ADDED this line
 }

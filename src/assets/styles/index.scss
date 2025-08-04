@@ -21,6 +21,10 @@
   
   }
 
+    @function getAnimationDuration($duration: number){
+    @return calc($duration * var(--animation-speed));
+  }
+
     * {
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
