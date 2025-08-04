@@ -1,6 +1,6 @@
 // frontend/src/App.js
 import React, { useState, useEffect, useCallback } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import "./assets/styles/index.scss";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ import NavBar from "./assets/components/NavBar";
 import Footer from "./assets/components/Footer";
 import BookingPanel from "./assets/components/BookingPanel";
 import TicketDisplay from "./assets/components/TicketDisplay";
+import ProtectedRoute from "./assets/components/ProtectedRoute";
 
 // Import page components
 import Home from "./pages/Home";
@@ -46,9 +47,28 @@ const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { isMobile, isTablet } = useResponsive();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    // localStorage.setItem('authToken', 'your_jwt_token_here'); // Re-enable if you implement token storage
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('authToken');
+    navigate('/login');
+  };
 
   const fetchEvents = useCallback(async () => {
     setIsLoading(true);
@@ -128,9 +148,7 @@ const App = () => {
 
       const response = await axios.post(`${API_BASE_URL}bookings/`, djangoBookingData);
       setBooking(response.data);
-      // setSelectedEvent(null); // This will be set to null after the timeout to allow message to show
-      // setTicketVisible(true); // This will be set after the timeout
-      fetchEvents(); // Refresh events to update available tickets
+      fetchEvents();
 
       setBookings((prev) => [...prev, {
         event: bookingData.event,
@@ -139,13 +157,11 @@ const App = () => {
         email: bookingData.email
       }]);
 
-      // <--- ADDED/MOVED LOGIC HERE FOR NAVIGATION AND PANEL CLOSING --->
-      // This timeout allows the BookingPanel to show its confirmation message
       setTimeout(() => {
-        setSelectedEvent(null); // Closes the BookingPanel
-        setTicketVisible(true); // Shows the TicketDisplay (if you still want it)
-        navigate('/my-bookings'); // Navigate to my bookings page
-      }, 3000); // 3-second delay for the confirmation message
+        setSelectedEvent(null);
+        setTicketVisible(true);
+        navigate('/my-bookings');
+      }, 3000);
 
     } catch (err) {
       console.error("Error confirming booking:", err);
@@ -154,8 +170,7 @@ const App = () => {
         console.error("Django booking errors:", err.response.data);
         setError(`Booking failed: ${JSON.stringify(err.response.data)}`);
       }
-      // Ensure panel closes even on error if desired, or show error within panel
-      setSelectedEvent(null); // Close the panel on error
+      setSelectedEvent(null);
     }
   };
 
@@ -166,34 +181,41 @@ const App = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <NavBar />
+      {isLoggedIn && <NavBar onLogout={handleLogout} />}
       <div className="flex-grow pt-16">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/events"
-            element={
-              <>
-                <EventListPage
-                  events={events}
-                  isLoading={isLoading}
-                  error={error}
-                  onBook={handleBook}
-                  searchQuery={searchQuery}
-                  setSearchQuery={setSearchQuery}
-                />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/events/:id"
-            element={<EventDetailPage onBook={handleBook} />}
-          />
-          <Route path="/my-bookings" element={<BookingsPage bookings={bookings} />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* Public Routes */}
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
           <Route path="/signup" element={<SignupPage />} />
-          {/* <Route path="/settings" element={<SettingsPage />} */}
+
+          {/* Protected Routes - only accessible if isLoggedIn is true */}
+          <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/events"
+              element={
+                <>
+                  <EventListPage
+                    events={events}
+                    isLoading={isLoading}
+                    error={error}
+                    onBook={handleBook}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                  />
+                  <Footer /> {/* Moved Footer HERE */}
+                </>
+              }
+            />
+            <Route
+              path="/events/:id"
+              element={<EventDetailPage onBook={handleBook} />}
+            />
+            <Route path="/my-bookings" element={<BookingsPage bookings={bookings} />} />
+          </Route>
+
+          {/* Fallback route: Redirect to login if path not found and not logged in */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
 
@@ -202,13 +224,13 @@ const App = () => {
           event={selectedEvent}
           onCancel={handleBookingCancel}
           onConfirm={handleBookingConfirm}
-          onClose={handleBookingCancel} // onClose still helpful for the X button
-          // navigate={navigate} // <--- REMOVE THIS PROP
+          onClose={handleBookingCancel}
         />
       )}
       {ticketVisible && booking && (
         <TicketDisplay booking={booking} onClose={handleTicketClose} />
       )}
+      {/* Footer is removed from here to only show on /events */}
     </div>
   );
 };
